@@ -1,19 +1,12 @@
 <?php
-    
-    session_start();
-    //configuracion entorno
-    require 'config.php';
-    require 'src/router.php';
-    require 'src/routes.php';
-    //enrutament
-    $controlador=getRoute($routes);
-    if($controlador!='login'&&$controlador!='register'){
-        $_SESSION['routes'][]=$controlador;
-    }
-    require 'src/controllers/'.$controlador.'.php';
-    //call controller
-    
-    
-    
-    
-?>
+    ini_set('display_errors', 'On');
+    require __DIR__.'/vendor/autoload.php';
+
+    use App\App;
+
+    new App();
+
+    //$config=require 'config.php';
+
+    //App::start();
+
