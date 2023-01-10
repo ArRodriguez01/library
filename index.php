@@ -1,12 +1,10 @@
-<?php
+<?php 
     ini_set('display_errors', 'On');
-    require __DIR__.'/vendor/autoload.php';
+    require_once __DIR__.'/vendor/autoload.php';
+    require_once __DIR__.'/bootstrap.php';
 
     use App\App;
 
     new App();
 
-    //$config=require 'config.php';
-
-    //App::start();
 

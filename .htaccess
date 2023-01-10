@@ -1,12 +1,8 @@
 Options +FollowSymLinks
-
 RewriteEngine On
-
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d 
-
 #no modifica ruta
 RewriteRule ^.*$ - [NC,L]
 #modifica ruta
 RewriteRule ^.*$ index.php [NC,L]
-

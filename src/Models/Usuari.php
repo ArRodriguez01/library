@@ -1,13 +1,13 @@
 <?php
 
   namespace App;  
-  class Usuari implements iModel{
+  class Usuari extends Model{
     private string $iduser;
     private string $nombre;
     private string $email;
     private string $passwd;
     private int $rolid;
-
+  
     public function setIduser($iduser){
       $this->iduser=$iduser;
     }
@@ -38,10 +38,8 @@
     public function getRolid(){
       return $this->rolid;
     }
-    public function select(){
+    public function nuevo($values){
       
     }
-    public function insert(){
-      hola que tal como estamos 
-    }
+    
   }

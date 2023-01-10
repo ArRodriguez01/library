@@ -1,7 +1,11 @@
 <?php
-    //datos acceso a .env
-    $dbhost=$_ENV['DB_HOST'];
-    $dbname=$_ENV['DB_NAME']; //base datos
-    $dsn="mysql:host={$dbhost};dbname={$dbname};charset=utf8mb4";
-    $dbuser=$_ENV['DB_USER'];
-    $dbpass=$_ENV['DB_PASSWORD'];
+
+    return[
+      'dbuser'=>$_ENV['DB_USER'],
+      'dbpassword'=>$_ENV['DB_PASSWORD'],
+      'dbname'=>$_ENV['DB_NAME'],
+      'connection'=>$_ENV['DB_DRIVER'].':host='.$_ENV['DB_HOST'],
+      'options'=>[
+        \PDO::ATTR_ERRMODE=>\PDO::ERRMODE_EXCEPTION
+      ],
+    ];

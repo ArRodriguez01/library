@@ -1,7 +1,13 @@
 <?php
 
   namespace App;  
-  class Usuari implements iModel{
+  class Alquiler extends Model{
+    private string $iduser;
+    private string $nombre;
+    private string $email;
+    private string $passwd;
+    private int $rolid;
+    
     public function select(){
       
     }

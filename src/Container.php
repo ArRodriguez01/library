@@ -12,8 +12,8 @@
     }
     public function get($key){
       if(!array_key_exists($key,self::$services)){
-          throw new Exception("No {$key} is bound in container")
+          throw new \Exception("No {$key} is bound in container");
       }
-      return self::$service[$key];
+      return self::$services[$key];
     }
   }

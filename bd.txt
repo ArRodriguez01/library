@@ -1,0 +1,96 @@
+CREATE TABLE IF NOT EXISTS `autores` (
+  `idAutor` INT NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `nacionalidad` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idAutor`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `catálogo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `catálogo` (
+  `ISBN` INT(13) NOT NULL,
+  `título` VARCHAR(200) NOT NULL,
+  `editorial` VARCHAR(30) NOT NULL,
+  `edición` INT NOT NULL,
+  `autor_id` INT NOT NULL,
+  PRIMARY KEY (`ISBN`),
+  INDEX `autor_idx` (`autor_id` ASC) ,
+  CONSTRAINT `autor`
+    FOREIGN KEY (`autor_id`)
+    REFERENCES `autores` (`idAutor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `roles` (
+  `idRoles` INT NOT NULL,
+  `rol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idRoles`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `users` (
+  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `passwd` VARCHAR(120) NOT NULL,
+  `rol_id` INT NOT NULL,
+  PRIMARY KEY (`idUser`),
+  INDEX `fk_users_roles_idx` (`rol_id` ASC) ,
+  CONSTRAINT `fk_users_roles`
+    FOREIGN KEY (`rol_id`)
+    REFERENCES `roles` (`idRoles`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alquiler`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `alquiler` (
+  `idAlquiler` INT NOT NULL,
+  `ISBN` INT(13) NOT NULL,
+  `userId` INT NOT NULL,
+  `fechaAlquiler` DATE NOT NULL,
+  PRIMARY KEY (`idAlquiler`),
+  INDEX `ISBN_idx` (`ISBN` ASC) ,
+  INDEX `USER_idx` (`userId` ASC) ,
+  CONSTRAINT `ISBN`
+    FOREIGN KEY (`ISBN`)
+    REFERENCES `catálogo` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `USER`
+    FOREIGN KEY (`userId`)
+    REFERENCES `users` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Sanciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sanciones` (
+  `idSanciones` INT NOT NULL,
+  `cost_dia` DECIMAL(2) NOT NULL,
+  `cost_total` DECIMAL(2) NOT NULL,
+  `idAlquiler` INT NOT NULL,
+  PRIMARY KEY (`idSanciones`),
+  INDEX `ALQUILERID_idx` (`idAlquiler` ASC) ,
+  CONSTRAINT `ALQUILERID`
+    FOREIGN KEY (`idAlquiler`)
+    REFERENCES `alquiler` (`idAlquiler`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

@@ -2,7 +2,7 @@
 
 namespace App;   
 
-class Llibre extends iModel{
+class Llibre extends Model{
   private string $isbn;
   private string $autor;
   private string $titol;
